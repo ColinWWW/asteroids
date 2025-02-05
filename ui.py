@@ -13,9 +13,3 @@ class Ui():
         image = pygame.image.load("./assets/background/backgroundart.png")
         screen.blit(image, (0,0))
 
-    def draw_shot(self, screen):
-        image = pygame.image.load("./assets/blasterbolt.png")
-        screen.blit(image,(self.position.x, self.poistion.y))
-
-    def draw_player(self):
-        image = pygame.image.load("./assets/ships.png")
