@@ -5,7 +5,7 @@ from circleshape import CircleShape
 from constants import PLAYER_RADIUS, PLAYER_SHOOT_COOLDOWN, PLAYER_SHOOT_SPEED, PLAYER_SPEED, PLAYER_TURN_SPEED, SHOT_RADIUS
 from shot import Shot
 from sounds import Sounds
-
+from ui import Ui
 
 class Player(CircleShape):
 
@@ -16,6 +16,7 @@ class Player(CircleShape):
         self.rotation = 0
         self.ratecount = 0
         self.sounds = Sounds()
+        self.ui = Ui()
 
     def triangle(self):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
@@ -26,6 +27,7 @@ class Player(CircleShape):
         return [a,b,c]
 
     def draw(self, screen):
+        
         pygame.draw.polygon(screen,"white", self.triangle(), 2)
 
     def rotate(self,dt):
