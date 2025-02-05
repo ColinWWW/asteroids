@@ -10,19 +10,16 @@ class Shot(CircleShape):
 
         self.sprite_width = 32
         self.sprite_height = 32
-        self.columns = 4  # Based on sprite layout
-        self.rows = 6  # Number of rows in the sprite sheet
-
+        self.columns = 4
+        self.rows = 6
         self.image = self.get_bullet_sprite(bullet_type)
 
     def get_bullet_sprite(self, bullet_type):
-        # Adjusting how the bullet type is mapped to the sprite sheet
         color = bullet_type // (self.columns * 3)
         remaining = bullet_type % (self.columns * 3)
         form = remaining // 3
         size = remaining % 3
 
-        # Adjust x and y based on new layout
         x = form * self.sprite_width
         y = (color * 3 + size) * self.sprite_height
 
@@ -38,10 +35,7 @@ class Shot(CircleShape):
         image_rect.y += offset_y
         screen.blit(self.image, image_rect)
 
-        # Debugging alignment: Draw bounding box
 
-        # Draw red circle to visualize hitbox
-        #pygame.draw.circle(screen, "red", (int(self.position.x), int(self.position.y)), self.radius, 1)
 
     def update(self, dt):
         self.position += self.velocity * dt
