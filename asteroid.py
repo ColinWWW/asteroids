@@ -6,23 +6,22 @@ from circleshape import CircleShape
 from constants import ASTEROID_MIN_RADIUS
 
 class Asteroid(CircleShape):
-    SPRITE_FOLDER = "./assets/moon_frames/"  # Adjust path if needed
+    SPRITE_FOLDER = "./assets/moon_frames/"
 
     def __init__(self, x, y, radius):
         super().__init__(x, y, radius)
 
-        # Load all frames from the folder
+
         self.frames = self.load_frames()
         self.current_frame = random.randint(0, len(self.frames) - 1)  # Start at a random frame
-        self.frame_timer = 0  # Time tracker for animation speed
-        self.animation_speed = 0.05  # Adjust speed (lower = faster animation)
+        self.frame_timer = 0
+        self.animation_speed = 0.05
 
     def load_frames(self):
-        """Loads all PNG images from the folder in numerical order."""
         images = []
-        for i in range(1, 61):  # Load from 1.png to 60.png
+        for i in range(1, 61):
             file_path = os.path.join(self.SPRITE_FOLDER, f"{i}.png")
-            if os.path.exists(file_path):  # Ensure the file exists before loading
+            if os.path.exists(file_path):
                 images.append(pygame.image.load(file_path).convert_alpha())
 
         if not images:
@@ -31,7 +30,6 @@ class Asteroid(CircleShape):
         return images
 
     def draw(self, screen):
-        """Draws the animated asteroid."""
         image = self.frames[self.current_frame]
         scale_factor = (self.radius*2) / image.get_width()
         scaled_size = (int(image.get_width() * scale_factor), int(image.get_height() * scale_factor))
@@ -40,7 +38,6 @@ class Asteroid(CircleShape):
         screen.blit(scaled_image, image_rect)
 
     def update(self, dt):
-        """Updates asteroid movement and animation."""
         self.position += self.velocity * dt
 
         # Animate frame
